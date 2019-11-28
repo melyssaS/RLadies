@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Proyecto</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Rladies</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Inicio</a>
+</li>
+<li>
+  <a href="about.html">Acerca de</a>
+</li>
+<li>
+  <a href="proyecto.html">Proyectos</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Proyecto</h1>
+
+</div>
+
+
+<pre class="r"><code>library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(gganimate)
+library(ggsci)
+library(gifski)
+empleo_genero &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-10-16/empleo_genero.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   variable = col_character(),
+##   pais_region = col_character(),
+##   codigo_pais_region = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>save(empleo_genero,file = &quot;Empleo.Rdata&quot;)
+load(&quot;Empleo.Rdata&quot;)</code></pre>
+<div id="selección-de-datos" class="section level2">
+<h2>Selección de datos</h2>
+<pre class="r"><code>Datos &lt;- empleo_genero %&gt;%
+  #Seleccion de las variables para cambiar a formato largo
+  pivot_longer(-c(variable,codigo_pais_region,pais_region),
+               names_to =&quot;año&quot;,
+               values_to = &quot;porcentaje&quot;) %&gt;% 
+  #Renombrando el codigo del pais
+  rename(codigo=codigo_pais_region) %&gt;% 
+  #Cambiando la variable año de caracter a numerico y codigo a factor
+  mutate(año = as.numeric(año),
+         codigo =as.factor(codigo) ) %&gt;% 
+  #Selecionando variable de interes &quot;Desempleo&quot;
+  filter(variable == &quot;desempleo_mujeres&quot; |  variable == &quot;desempleo_hombres&quot;) %&gt;% 
+  #Eliminando valores faltantes
+  filter(!is.na(porcentaje)) %&gt;% 
+  #quitando la variable pais region
+  select(-pais_region) %&gt;%  
+  #Filtrando paises en frontera con colobia
+  filter(codigo == &quot;COL&quot; | codigo ==&quot;ECU&quot; | codigo ==&quot;PER&quot; | codigo ==&quot;VEN&quot; | codigo ==&quot;BRA&quot; | codigo ==&quot;PAN&quot;)
+#Figura
+gplot &lt;- ggplot(Datos,aes(x=año,y=porcentaje,color=variable)) + 
+  geom_line()+
+  facet_wrap(~codigo,scales = &quot;free&quot;)+
+  scale_color_jco(name=&quot;Desempleo&quot;,
+                  breaks = c(&quot;desempleo_hombres&quot;,&quot;desempleo_mujeres&quot;),
+                  labels=c(&quot;Hombres&quot;,&quot;Mujeres&quot;))+
+  theme_dark()+
+  geom_tile(color=&quot;orange&quot;)+
+  theme(text = element_text(size=10),
+        legend.text = element_text( size = 12),
+        legend.title = element_text(size=14),
+        legend.position = &quot;top&quot;,
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = &#39;black&#39;),
+        legend.background = element_rect(fill = &quot;white&quot;, color = NA),
+        legend.key = element_rect(fill = &quot;white&quot;))+
+  labs(x=&quot;Año&quot;,y=&quot;Porcentaje&quot;)+
+  transition_reveal(año)
+
+animate(gplot, renderer = gifski_renderer())</code></pre>
+<pre><code>## 
+Rendering [&gt;-------------------------------------------------------------------------------] at 2.2 fps ~ eta: 44s
+Rendering [=&gt;------------------------------------------------------------------------------] at 2.4 fps ~ eta: 41s
+Rendering [==&gt;-----------------------------------------------------------------------------] at 2.4 fps ~ eta: 41s
+Rendering [===&gt;----------------------------------------------------------------------------] at 2.4 fps ~ eta: 40s
+Rendering [====&gt;---------------------------------------------------------------------------] at 2.3 fps ~ eta: 41s
+Rendering [=====&gt;--------------------------------------------------------------------------] at 2.3 fps ~ eta: 40s
+Rendering [=====&gt;--------------------------------------------------------------------------] at 2.4 fps ~ eta: 39s
+Rendering [======&gt;-------------------------------------------------------------------------] at 2.4 fps ~ eta: 38s
+Rendering [=======&gt;------------------------------------------------------------------------] at 2.4 fps ~ eta: 37s
+Rendering [========&gt;-----------------------------------------------------------------------] at 2.4 fps ~ eta: 37s
+Rendering [=========&gt;----------------------------------------------------------------------] at 2.4 fps ~ eta: 36s
+Rendering [==========&gt;---------------------------------------------------------------------] at 2.4 fps ~ eta: 35s
+Rendering [===========&gt;--------------------------------------------------------------------] at 2.4 fps ~ eta: 35s
+Rendering [============&gt;-------------------------------------------------------------------] at 2.4 fps ~ eta: 35s
+Rendering [=============&gt;------------------------------------------------------------------] at 2.4 fps ~ eta: 34s
+Rendering [==============&gt;-----------------------------------------------------------------] at 2.4 fps ~ eta: 34s
+Rendering [===============&gt;----------------------------------------------------------------] at 2.4 fps ~ eta: 33s
+Rendering [================&gt;---------------------------------------------------------------] at 2.4 fps ~ eta: 33s
+Rendering [=================&gt;--------------------------------------------------------------] at 2.4 fps ~ eta: 32s
+Rendering [==================&gt;-------------------------------------------------------------] at 2.4 fps ~ eta: 32s
+Rendering [===================&gt;------------------------------------------------------------] at 2.4 fps ~ eta: 31s
+Rendering [====================&gt;-----------------------------------------------------------] at 2.4 fps ~ eta: 31s
+Rendering [=====================&gt;----------------------------------------------------------] at 2.4 fps ~ eta: 30s
+Rendering [======================&gt;---------------------------------------------------------] at 2.4 fps ~ eta: 29s
+Rendering [=======================&gt;--------------------------------------------------------] at 2.4 fps ~ eta: 29s
+Rendering [========================&gt;-------------------------------------------------------] at 2.4 fps ~ eta: 28s
+Rendering [=========================&gt;------------------------------------------------------] at 2.4 fps ~ eta: 28s
+Rendering [==========================&gt;-----------------------------------------------------] at 2.4 fps ~ eta: 27s
+Rendering [===========================&gt;----------------------------------------------------] at 2.4 fps ~ eta: 27s
+Rendering [============================&gt;---------------------------------------------------] at 2.4 fps ~ eta: 26s
+Rendering [=============================&gt;--------------------------------------------------] at 2.4 fps ~ eta: 26s
+Rendering [=============================&gt;--------------------------------------------------] at 2.4 fps ~ eta: 25s
+Rendering [==============================&gt;-------------------------------------------------] at 2.4 fps ~ eta: 25s
+Rendering [===============================&gt;------------------------------------------------] at 2.4 fps ~ eta: 25s
+Rendering [================================&gt;-----------------------------------------------] at 2.4 fps ~ eta: 24s
+Rendering [=================================&gt;----------------------------------------------] at 2.4 fps ~ eta: 24s
+Rendering [=================================&gt;----------------------------------------------] at 2.4 fps ~ eta: 23s
+Rendering [==================================&gt;---------------------------------------------] at 2.4 fps ~ eta: 23s
+Rendering [===================================&gt;--------------------------------------------] at 2.4 fps ~ eta: 23s
+Rendering [====================================&gt;-------------------------------------------] at 2.4 fps ~ eta: 22s
+Rendering [=====================================&gt;------------------------------------------] at 2.4 fps ~ eta: 22s
+Rendering [=====================================&gt;------------------------------------------] at 2.4 fps ~ eta: 21s
+Rendering [======================================&gt;-----------------------------------------] at 2.4 fps ~ eta: 21s
+Rendering [=======================================&gt;----------------------------------------] at 2.4 fps ~ eta: 21s
+Rendering [========================================&gt;---------------------------------------] at 2.4 fps ~ eta: 20s
+Rendering [=========================================&gt;--------------------------------------] at 2.4 fps ~ eta: 20s
+Rendering [=========================================&gt;--------------------------------------] at 2.4 fps ~ eta: 19s
+Rendering [==========================================&gt;-------------------------------------] at 2.4 fps ~ eta: 19s
+Rendering [===========================================&gt;------------------------------------] at 2.4 fps ~ eta: 19s
+Rendering [============================================&gt;-----------------------------------] at 2.4 fps ~ eta: 18s
+Rendering [=============================================&gt;----------------------------------] at 2.4 fps ~ eta: 18s
+Rendering [=============================================&gt;----------------------------------] at 2.3 fps ~ eta: 18s
+Rendering [==============================================&gt;---------------------------------] at 2.3 fps ~ eta: 18s
+Rendering [===============================================&gt;--------------------------------] at 2.3 fps ~ eta: 17s
+Rendering [================================================&gt;-------------------------------] at 2.3 fps ~ eta: 17s
+Rendering [=================================================&gt;------------------------------] at 2.3 fps ~ eta: 16s
+Rendering [==================================================&gt;-----------------------------] at 2.3 fps ~ eta: 16s
+Rendering [===================================================&gt;----------------------------] at 2.3 fps ~ eta: 15s
+Rendering [====================================================&gt;---------------------------] at 2.3 fps ~ eta: 15s
+Rendering [=====================================================&gt;--------------------------] at 2.3 fps ~ eta: 14s
+Rendering [======================================================&gt;-------------------------] at 2.3 fps ~ eta: 14s
+Rendering [=======================================================&gt;------------------------] at 2.3 fps ~ eta: 13s
+Rendering [========================================================&gt;-----------------------] at 2.3 fps ~ eta: 13s
+Rendering [=========================================================&gt;----------------------] at 2.3 fps ~ eta: 12s
+Rendering [==========================================================&gt;---------------------] at 2.2 fps ~ eta: 12s
+Rendering [===========================================================&gt;--------------------] at 2.2 fps ~ eta: 11s
+Rendering [============================================================&gt;-------------------] at 2.2 fps ~ eta: 11s
+Rendering [=============================================================&gt;------------------] at 2.2 fps ~ eta: 10s
+Rendering [==============================================================&gt;-----------------] at 2.2 fps ~ eta: 10s
+Rendering [===============================================================&gt;----------------] at 2.2 fps ~ eta:  9s
+Rendering [================================================================&gt;---------------] at 2.2 fps ~ eta:  9s
+Rendering [=================================================================&gt;--------------] at 2.2 fps ~ eta:  8s
+Rendering [==================================================================&gt;-------------] at 2.2 fps ~ eta:  7s
+Rendering [===================================================================&gt;------------] at 2.2 fps ~ eta:  7s
+Rendering [====================================================================&gt;-----------] at 2.2 fps ~ eta:  6s
+Rendering [=====================================================================&gt;----------] at 2.2 fps ~ eta:  6s
+Rendering [======================================================================&gt;---------] at 2.2 fps ~ eta:  5s
+Rendering [=======================================================================&gt;--------] at 2.2 fps ~ eta:  5s
+Rendering [========================================================================&gt;-------] at 2.2 fps ~ eta:  4s
+Rendering [=========================================================================&gt;------] at 2.2 fps ~ eta:  4s
+Rendering [=========================================================================&gt;------] at 2.2 fps ~ eta:  3s
+Rendering [==========================================================================&gt;-----] at 2.2 fps ~ eta:  3s
+Rendering [===========================================================================&gt;----] at 2.2 fps ~ eta:  2s
+Rendering [============================================================================&gt;---] at 2.2 fps ~ eta:  2s
+Rendering [=============================================================================&gt;--] at 2.2 fps ~ eta:  1s
+Rendering [==============================================================================&gt;-] at 2.2 fps ~ eta:  0s
+Rendering [================================================================================] at 2.2 fps ~ eta:  0s
+                                                                                                                  </code></pre>
+<pre><code>## 
+Frame 1 (1%)
+Frame 2 (2%)
+Frame 3 (3%)
+Frame 4 (4%)
+Frame 5 (5%)
+Frame 6 (6%)
+Frame 7 (7%)
+Frame 8 (8%)
+Frame 9 (9%)
+Frame 10 (10%)
+Frame 11 (11%)
+Frame 12 (12%)
+Frame 13 (13%)
+Frame 14 (14%)
+Frame 15 (15%)
+Frame 16 (16%)
+Frame 17 (17%)
+Frame 18 (18%)
+Frame 19 (19%)
+Frame 20 (20%)
+Frame 21 (21%)
+Frame 22 (22%)
+Frame 23 (23%)
+Frame 24 (24%)
+Frame 25 (25%)
+Frame 26 (26%)
+Frame 27 (27%)
+Frame 28 (28%)
+Frame 29 (29%)
+Frame 30 (30%)
+Frame 31 (31%)
+Frame 32 (32%)
+Frame 33 (33%)
+Frame 34 (34%)
+Frame 35 (35%)
+Frame 36 (36%)
+Frame 37 (37%)
+Frame 38 (38%)
+Frame 39 (39%)
+Frame 40 (40%)
+Frame 41 (41%)
+Frame 42 (42%)
+Frame 43 (43%)
+Frame 44 (44%)
+Frame 45 (45%)
+Frame 46 (46%)
+Frame 47 (47%)
+Frame 48 (48%)
+Frame 49 (49%)
+Frame 50 (50%)
+Frame 51 (51%)
+Frame 52 (52%)
+Frame 53 (53%)
+Frame 54 (54%)
+Frame 55 (55%)
+Frame 56 (56%)
+Frame 57 (57%)
+Frame 58 (58%)
+Frame 59 (59%)
+Frame 60 (60%)
+Frame 61 (61%)
+Frame 62 (62%)
+Frame 63 (63%)
+Frame 64 (64%)
+Frame 65 (65%)
+Frame 66 (66%)
+Frame 67 (67%)
+Frame 68 (68%)
+Frame 69 (69%)
+Frame 70 (70%)
+Frame 71 (71%)
+Frame 72 (72%)
+Frame 73 (73%)
+Frame 74 (74%)
+Frame 75 (75%)
+Frame 76 (76%)
+Frame 77 (77%)
+Frame 78 (78%)
+Frame 79 (79%)
+Frame 80 (80%)
+Frame 81 (81%)
+Frame 82 (82%)
+Frame 83 (83%)
+Frame 84 (84%)
+Frame 85 (85%)
+Frame 86 (86%)
+Frame 87 (87%)
+Frame 88 (88%)
+Frame 89 (89%)
+Frame 90 (90%)
+Frame 91 (91%)
+Frame 92 (92%)
+Frame 93 (93%)
+Frame 94 (94%)
+Frame 95 (95%)
+Frame 96 (96%)
+Frame 97 (97%)
+Frame 98 (98%)
+Frame 99 (99%)
+Frame 100 (100%)
+## Finalizing encoding... done!</code></pre>
+<p><img src="proyecto_files/figure-html/unnamed-chunk-2-1.gif" /><!-- --></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

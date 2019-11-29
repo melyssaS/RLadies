@@ -5,7 +5,30 @@ output: html_document
     
 ---
 
+
+## Selección de datos 
 ```{r}
+library(leaflet)
+library(leaflet.extras)
+library(magrittr)
+library(plyr)
+datos <- read.csv("fuerza laboral.csv")
+mapa <- leaflet()%>% addTiles()%>%
+  addMarkers(lng = datos$Longitud,lat = datos$latitud,
+             clusterOptions = markerClusterOptions(),
+             popup = paste("<b>País:", datos$Country.Name,"</b>", "<br/>",
+                           "Fuerza laboral:", datos$Fuerzalaboral,"<br/>",
+                           "Año:",datos$Year,"<br/>"
+             )
+  )
+
+mapa%>%fitBounds(lng1 =--64.9912286 ,lat1 = -17.0568696,lng2 =-64.9912286 ,lat2 =-17.0568696 )
+
+```
+
+## Librerias
+
+```{r message=FALSE}
 library(readr)
 library(tidyr)
 library(dplyr)
@@ -20,14 +43,14 @@ load("Empleo.Rdata")
 
 ## Selección de datos 
 
-```{r}
+```{r message=FALSE,comment=NA}
 Datos <- empleo_genero %>%
   #Seleccion de las variables para cambiar a formato largo
   pivot_longer(-c(variable,codigo_pais_region,pais_region),
                names_to ="año",
                values_to = "porcentaje") %>% 
   #Renombrando el codigo del pais
-  rename(codigo=codigo_pais_region) %>% 
+ rename(codigo=codigo_pais_region) %>% 
   #Cambiando la variable año de caracter a numerico y codigo a factor
   mutate(año = as.numeric(año),
          codigo =as.factor(codigo) ) %>% 
@@ -61,4 +84,6 @@ gplot <- ggplot(Datos,aes(x=año,y=porcentaje,color=variable)) +
   transition_reveal(año)
 
 animate(gplot, renderer = gifski_renderer())
+
 ```
+

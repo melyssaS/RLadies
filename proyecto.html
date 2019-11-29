@@ -13,7 +13,7 @@
 
 <title>Proyecto</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -22,6 +22,19 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="site_libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="site_libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -297,6 +310,28 @@ $(document).ready(function () {
 </div>
 
 
+<div id="selección-de-datos" class="section level2">
+<h2>Selección de datos</h2>
+<pre class="r"><code>library(leaflet)
+library(leaflet.extras)
+library(magrittr)
+library(plyr)
+datos &lt;- read.csv(&quot;fuerza laboral.csv&quot;)
+mapa &lt;- leaflet()%&gt;% addTiles()%&gt;%
+  addMarkers(lng = datos$Longitud,lat = datos$latitud,
+             clusterOptions = markerClusterOptions(),
+             popup = paste(&quot;&lt;b&gt;País:&quot;, datos$Country.Name,&quot;&lt;/b&gt;&quot;, &quot;&lt;br/&gt;&quot;,
+                           &quot;Fuerza laboral:&quot;, datos$Fuerzalaboral,&quot;&lt;br/&gt;&quot;,
+                           &quot;Año:&quot;,datos$Year,&quot;&lt;br/&gt;&quot;
+             )
+  )
+
+mapa%&gt;%fitBounds(lng1 =--64.9912286 ,lat1 = -17.0568696,lng2 =-64.9912286 ,lat2 =-17.0568696 )</code></pre>
+<div id="htmlwidget-f6fcc5fb73b2ae061aff" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f6fcc5fb73b2ae061aff">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-10,4.3,-1.83,8.99,-12.04,6.42],[-55,-74.79,-78.183,-79.52,-77.03,-66.59],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>País: Brasil <\/b> <br/> Fuerza laboral: 45714195 <br/> Año: 2018 <br/>","<b>País: Colombia <\/b> <br/> Fuerza laboral: 11532908 <br/> Año: 2018 <br/>","<b>País: Ecuador <\/b> <br/> Fuerza laboral: 3508491 <br/> Año: 2018 <br/>","<b>País: Panam? <\/b> <br/> Fuerza laboral: 804027 <br/> Año: 2018 <br/>","<b>País: Peru <\/b> <br/> Fuerza laboral: 8398895 <br/> Año: 2018 <br/>","<b>País: Venezuela <\/b> <br/> Fuerza laboral: 5162000 <br/> Año: 2018 <br/>"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-12.04,8.99],"lng":[-79.52,-55]},"fitBounds":[-17.0568696,64.9912286,-17.0568696,-64.9912286,[]]},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="librerias" class="section level2">
+<h2>Librerias</h2>
 <pre class="r"><code>library(readr)
 library(tidyr)
 library(dplyr)
@@ -304,18 +339,11 @@ library(ggplot2)
 library(gganimate)
 library(ggsci)
 library(gifski)
-empleo_genero &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-10-16/empleo_genero.csv&quot;)</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   .default = col_double(),
-##   variable = col_character(),
-##   pais_region = col_character(),
-##   codigo_pais_region = col_character()
-## )</code></pre>
-<pre><code>## See spec(...) for full column specifications.</code></pre>
-<pre class="r"><code>save(empleo_genero,file = &quot;Empleo.Rdata&quot;)
+empleo_genero &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-10-16/empleo_genero.csv&quot;)
+save(empleo_genero,file = &quot;Empleo.Rdata&quot;)
 load(&quot;Empleo.Rdata&quot;)</code></pre>
-<div id="selección-de-datos" class="section level2">
+</div>
+<div id="selección-de-datos-1" class="section level2">
 <h2>Selección de datos</h2>
 <pre class="r"><code>Datos &lt;- empleo_genero %&gt;%
   #Seleccion de las variables para cambiar a formato largo
@@ -323,7 +351,7 @@ load(&quot;Empleo.Rdata&quot;)</code></pre>
                names_to =&quot;año&quot;,
                values_to = &quot;porcentaje&quot;) %&gt;% 
   #Renombrando el codigo del pais
-  rename(codigo=codigo_pais_region) %&gt;% 
+ rename(codigo=codigo_pais_region) %&gt;% 
   #Cambiando la variable año de caracter a numerico y codigo a factor
   mutate(año = as.numeric(año),
          codigo =as.factor(codigo) ) %&gt;% 
@@ -357,96 +385,7 @@ gplot &lt;- ggplot(Datos,aes(x=año,y=porcentaje,color=variable)) +
   transition_reveal(año)
 
 animate(gplot, renderer = gifski_renderer())</code></pre>
-<pre><code>## 
-Rendering [&gt;-------------------------------------------------------------------------------] at 2.2 fps ~ eta: 44s
-Rendering [=&gt;------------------------------------------------------------------------------] at 2.4 fps ~ eta: 41s
-Rendering [==&gt;-----------------------------------------------------------------------------] at 2.4 fps ~ eta: 41s
-Rendering [===&gt;----------------------------------------------------------------------------] at 2.4 fps ~ eta: 40s
-Rendering [====&gt;---------------------------------------------------------------------------] at 2.3 fps ~ eta: 41s
-Rendering [=====&gt;--------------------------------------------------------------------------] at 2.3 fps ~ eta: 40s
-Rendering [=====&gt;--------------------------------------------------------------------------] at 2.4 fps ~ eta: 39s
-Rendering [======&gt;-------------------------------------------------------------------------] at 2.4 fps ~ eta: 38s
-Rendering [=======&gt;------------------------------------------------------------------------] at 2.4 fps ~ eta: 37s
-Rendering [========&gt;-----------------------------------------------------------------------] at 2.4 fps ~ eta: 37s
-Rendering [=========&gt;----------------------------------------------------------------------] at 2.4 fps ~ eta: 36s
-Rendering [==========&gt;---------------------------------------------------------------------] at 2.4 fps ~ eta: 35s
-Rendering [===========&gt;--------------------------------------------------------------------] at 2.4 fps ~ eta: 35s
-Rendering [============&gt;-------------------------------------------------------------------] at 2.4 fps ~ eta: 35s
-Rendering [=============&gt;------------------------------------------------------------------] at 2.4 fps ~ eta: 34s
-Rendering [==============&gt;-----------------------------------------------------------------] at 2.4 fps ~ eta: 34s
-Rendering [===============&gt;----------------------------------------------------------------] at 2.4 fps ~ eta: 33s
-Rendering [================&gt;---------------------------------------------------------------] at 2.4 fps ~ eta: 33s
-Rendering [=================&gt;--------------------------------------------------------------] at 2.4 fps ~ eta: 32s
-Rendering [==================&gt;-------------------------------------------------------------] at 2.4 fps ~ eta: 32s
-Rendering [===================&gt;------------------------------------------------------------] at 2.4 fps ~ eta: 31s
-Rendering [====================&gt;-----------------------------------------------------------] at 2.4 fps ~ eta: 31s
-Rendering [=====================&gt;----------------------------------------------------------] at 2.4 fps ~ eta: 30s
-Rendering [======================&gt;---------------------------------------------------------] at 2.4 fps ~ eta: 29s
-Rendering [=======================&gt;--------------------------------------------------------] at 2.4 fps ~ eta: 29s
-Rendering [========================&gt;-------------------------------------------------------] at 2.4 fps ~ eta: 28s
-Rendering [=========================&gt;------------------------------------------------------] at 2.4 fps ~ eta: 28s
-Rendering [==========================&gt;-----------------------------------------------------] at 2.4 fps ~ eta: 27s
-Rendering [===========================&gt;----------------------------------------------------] at 2.4 fps ~ eta: 27s
-Rendering [============================&gt;---------------------------------------------------] at 2.4 fps ~ eta: 26s
-Rendering [=============================&gt;--------------------------------------------------] at 2.4 fps ~ eta: 26s
-Rendering [=============================&gt;--------------------------------------------------] at 2.4 fps ~ eta: 25s
-Rendering [==============================&gt;-------------------------------------------------] at 2.4 fps ~ eta: 25s
-Rendering [===============================&gt;------------------------------------------------] at 2.4 fps ~ eta: 25s
-Rendering [================================&gt;-----------------------------------------------] at 2.4 fps ~ eta: 24s
-Rendering [=================================&gt;----------------------------------------------] at 2.4 fps ~ eta: 24s
-Rendering [=================================&gt;----------------------------------------------] at 2.4 fps ~ eta: 23s
-Rendering [==================================&gt;---------------------------------------------] at 2.4 fps ~ eta: 23s
-Rendering [===================================&gt;--------------------------------------------] at 2.4 fps ~ eta: 23s
-Rendering [====================================&gt;-------------------------------------------] at 2.4 fps ~ eta: 22s
-Rendering [=====================================&gt;------------------------------------------] at 2.4 fps ~ eta: 22s
-Rendering [=====================================&gt;------------------------------------------] at 2.4 fps ~ eta: 21s
-Rendering [======================================&gt;-----------------------------------------] at 2.4 fps ~ eta: 21s
-Rendering [=======================================&gt;----------------------------------------] at 2.4 fps ~ eta: 21s
-Rendering [========================================&gt;---------------------------------------] at 2.4 fps ~ eta: 20s
-Rendering [=========================================&gt;--------------------------------------] at 2.4 fps ~ eta: 20s
-Rendering [=========================================&gt;--------------------------------------] at 2.4 fps ~ eta: 19s
-Rendering [==========================================&gt;-------------------------------------] at 2.4 fps ~ eta: 19s
-Rendering [===========================================&gt;------------------------------------] at 2.4 fps ~ eta: 19s
-Rendering [============================================&gt;-----------------------------------] at 2.4 fps ~ eta: 18s
-Rendering [=============================================&gt;----------------------------------] at 2.4 fps ~ eta: 18s
-Rendering [=============================================&gt;----------------------------------] at 2.3 fps ~ eta: 18s
-Rendering [==============================================&gt;---------------------------------] at 2.3 fps ~ eta: 18s
-Rendering [===============================================&gt;--------------------------------] at 2.3 fps ~ eta: 17s
-Rendering [================================================&gt;-------------------------------] at 2.3 fps ~ eta: 17s
-Rendering [=================================================&gt;------------------------------] at 2.3 fps ~ eta: 16s
-Rendering [==================================================&gt;-----------------------------] at 2.3 fps ~ eta: 16s
-Rendering [===================================================&gt;----------------------------] at 2.3 fps ~ eta: 15s
-Rendering [====================================================&gt;---------------------------] at 2.3 fps ~ eta: 15s
-Rendering [=====================================================&gt;--------------------------] at 2.3 fps ~ eta: 14s
-Rendering [======================================================&gt;-------------------------] at 2.3 fps ~ eta: 14s
-Rendering [=======================================================&gt;------------------------] at 2.3 fps ~ eta: 13s
-Rendering [========================================================&gt;-----------------------] at 2.3 fps ~ eta: 13s
-Rendering [=========================================================&gt;----------------------] at 2.3 fps ~ eta: 12s
-Rendering [==========================================================&gt;---------------------] at 2.2 fps ~ eta: 12s
-Rendering [===========================================================&gt;--------------------] at 2.2 fps ~ eta: 11s
-Rendering [============================================================&gt;-------------------] at 2.2 fps ~ eta: 11s
-Rendering [=============================================================&gt;------------------] at 2.2 fps ~ eta: 10s
-Rendering [==============================================================&gt;-----------------] at 2.2 fps ~ eta: 10s
-Rendering [===============================================================&gt;----------------] at 2.2 fps ~ eta:  9s
-Rendering [================================================================&gt;---------------] at 2.2 fps ~ eta:  9s
-Rendering [=================================================================&gt;--------------] at 2.2 fps ~ eta:  8s
-Rendering [==================================================================&gt;-------------] at 2.2 fps ~ eta:  7s
-Rendering [===================================================================&gt;------------] at 2.2 fps ~ eta:  7s
-Rendering [====================================================================&gt;-----------] at 2.2 fps ~ eta:  6s
-Rendering [=====================================================================&gt;----------] at 2.2 fps ~ eta:  6s
-Rendering [======================================================================&gt;---------] at 2.2 fps ~ eta:  5s
-Rendering [=======================================================================&gt;--------] at 2.2 fps ~ eta:  5s
-Rendering [========================================================================&gt;-------] at 2.2 fps ~ eta:  4s
-Rendering [=========================================================================&gt;------] at 2.2 fps ~ eta:  4s
-Rendering [=========================================================================&gt;------] at 2.2 fps ~ eta:  3s
-Rendering [==========================================================================&gt;-----] at 2.2 fps ~ eta:  3s
-Rendering [===========================================================================&gt;----] at 2.2 fps ~ eta:  2s
-Rendering [============================================================================&gt;---] at 2.2 fps ~ eta:  2s
-Rendering [=============================================================================&gt;--] at 2.2 fps ~ eta:  1s
-Rendering [==============================================================================&gt;-] at 2.2 fps ~ eta:  0s
-Rendering [================================================================================] at 2.2 fps ~ eta:  0s
-                                                                                                                  </code></pre>
-<pre><code>## 
+<pre><code>
 Frame 1 (1%)
 Frame 2 (2%)
 Frame 3 (3%)
@@ -547,8 +486,8 @@ Frame 97 (97%)
 Frame 98 (98%)
 Frame 99 (99%)
 Frame 100 (100%)
-## Finalizing encoding... done!</code></pre>
-<p><img src="proyecto_files/figure-html/unnamed-chunk-2-1.gif" /><!-- --></p>
+Finalizing encoding... done!</code></pre>
+<p><img src="proyecto_files/figure-html/unnamed-chunk-3-1.gif" /><!-- --></p>
 </div>
 
 

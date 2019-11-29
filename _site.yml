@@ -14,8 +14,7 @@ output:
   html_document:
     theme: cosmo
     highlight: textmate
-    includes:
-      #in_header: prueba.html
   
+    
     
    

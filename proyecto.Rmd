@@ -4,43 +4,8 @@ title: "Proyecto"
 output: html_document
     
 ---
-```{r message=FALSE}
-library(dplyr)
-library(tibble)
-library(readr)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
-library(gganimate)
-library(ggsci)
-library(gifski)
-```
-## NUEVO
-```{r message=FALSE}
-datos <- read.csv(file="DATOS 1.csv",sep=";")
-#Animada de fuerza laboral en cada pais 
-pgg <- ggplot(
-  datos,
-  aes(Ao,FL,  color=Pas)) +   geom_line() +   scale_alpha() +
-  labs(x = "Ao", y = "Fuerza laboral") +
-  theme(legend.position = "top")
-pgg+   
-  geom_point(aes(group = seq_along(Ao))) +
-  transition_reveal(Ao)
-#Cada pa?s aparte
-pgg <- ggplot(
-  datos,
-  aes(Ao,FL,  color=Pas)) +   geom_line() +   scale_alpha() +
-  labs(x = "Ao", y = "Fuerza laboral") +
-  theme(legend.position = "top")
-pgg+   
-  geom_point(aes(group = seq_along(Ao))) +
-  facet_wrap(~Pas)+
-  transition_reveal(Ao)
-```
 
-
-
+# Mapa de Fuerza Laboral
 ```{r}
 library(leaflet)
 library(leaflet.extras)
@@ -60,8 +25,8 @@ mapa%>%fitBounds(lng1 =--64.9912286 ,lat1 = -17.0568696,lng2 =-64.9912286 ,lat2 
 
 ```
 
-## Salario Hombres vs Mujeres
-
+# Salario Hombres vs Mujeres
+## Librerias
 ```{r message=FALSE}
 library(readr)
 library(tidyr)
@@ -75,7 +40,7 @@ save(empleo_genero,file = "Empleo.Rdata")
 load("Empleo.Rdata")
 ```
 
-## Selección de datos 
+## Codigo
 ```{r message=FALSE,comment=NA}
 Datos <- empleo_genero %>%
   #Seleccion de las variables para cambiar a formato largo
@@ -120,3 +85,41 @@ animate(gplot, renderer = gifski_renderer())
 
 ```
 
+
+# Grafica de Fuerza laboral en Latinoamerica
+## Codigo
+```{r message=FALSE}
+library(dplyr)
+library(tibble)
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(gganimate)
+library(ggsci)
+library(gifski)
+```
+
+## Codigo
+```{r message=FALSE}
+datos <- read.csv(file="DATOS 1.csv",sep=";")
+#Animada de fuerza laboral en cada pais 
+pgg <- ggplot(
+  datos,
+  aes(Ao,FL,  color=Pas)) +   geom_line() +   scale_alpha() +
+  labs(x = "Ao", y = "Fuerza laboral") +
+  theme(legend.position = "top")
+pgg+   
+  geom_point(aes(group = seq_along(Ao))) +
+  transition_reveal(Ao)
+#Cada pa?s aparte
+pgg <- ggplot(
+  datos,
+  aes(Ao,FL,  color=Pas)) +   geom_line() +   scale_alpha() +
+  labs(x = "Ao", y = "Fuerza laboral") +
+  theme(legend.position = "top")
+pgg+   
+  geom_point(aes(group = seq_along(Ao))) +
+  facet_wrap(~Pas)+
+  transition_reveal(Ao)
+```

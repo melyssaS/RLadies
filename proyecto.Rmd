@@ -4,6 +4,47 @@ title: "Proyecto"
 output: html_document
     
 ---
+```{r message=FALSE}
+library(dplyr)
+library(tibble)
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(gganimate)
+library(ggsci)
+library(gifski)
+
+```
+## NUEVO
+```{r message=FALSE}
+
+datos <- read.csv(file="DATOS 1.csv",sep=";")
+
+#Animada de fuerza laboral en cada pais 
+pgg <- ggplot(
+  datos,
+  aes(Ao,FL,  color=Pas)) +   geom_line() +   scale_alpha() +
+  labs(x = "Ao", y = "Fuerza laboral") +
+  theme(legend.position = "top")
+pgg+   
+  geom_point(aes(group = seq_along(Ao))) +
+  transition_reveal(Ao)
+
+#Cada pa?s aparte
+pgg <- ggplot(
+  datos,
+  aes(Ao,FL,  color=Pas)) +   geom_line() +   scale_alpha() +
+  labs(x = "Ao", y = "Fuerza laboral") +
+  theme(legend.position = "top")
+pgg+   
+  geom_point(aes(group = seq_along(Ao))) +
+  facet_wrap(~Pas)+
+  transition_reveal(Ao)
+
+
+```
+
 
 
 ## Selección de datos 
@@ -83,6 +124,9 @@ gplot <- ggplot(Datos,aes(x=año,y=porcentaje,color=variable)) +
   labs(x="Año",y="Porcentaje")+
   transition_reveal(año)
 
+  progress <- interactive()
+  if (progress) message('')
+  
 animate(gplot, renderer = gifski_renderer())
 
 ```

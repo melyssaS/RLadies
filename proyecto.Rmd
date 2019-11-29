@@ -14,13 +14,10 @@ library(ggplot2)
 library(gganimate)
 library(ggsci)
 library(gifski)
-
 ```
 ## NUEVO
 ```{r message=FALSE}
-
 datos <- read.csv(file="DATOS 1.csv",sep=";")
-
 #Animada de fuerza laboral en cada pais 
 pgg <- ggplot(
   datos,
@@ -30,7 +27,6 @@ pgg <- ggplot(
 pgg+   
   geom_point(aes(group = seq_along(Ao))) +
   transition_reveal(Ao)
-
 #Cada pa?s aparte
 pgg <- ggplot(
   datos,
@@ -41,13 +37,10 @@ pgg+
   geom_point(aes(group = seq_along(Ao))) +
   facet_wrap(~Pas)+
   transition_reveal(Ao)
-
-
 ```
 
 
 
-## Selección de datos 
 ```{r}
 library(leaflet)
 library(leaflet.extras)
@@ -67,7 +60,7 @@ mapa%>%fitBounds(lng1 =--64.9912286 ,lat1 = -17.0568696,lng2 =-64.9912286 ,lat2 
 
 ```
 
-## Librerias
+## Salario Hombres vs Mujeres
 
 ```{r message=FALSE}
 library(readr)
@@ -83,7 +76,6 @@ load("Empleo.Rdata")
 ```
 
 ## Selección de datos 
-
 ```{r message=FALSE,comment=NA}
 Datos <- empleo_genero %>%
   #Seleccion de las variables para cambiar a formato largo
@@ -124,9 +116,6 @@ gplot <- ggplot(Datos,aes(x=año,y=porcentaje,color=variable)) +
   labs(x="Año",y="Porcentaje")+
   transition_reveal(año)
 
-  progress <- interactive()
-  if (progress) message('')
-  
 animate(gplot, renderer = gifski_renderer())
 
 ```

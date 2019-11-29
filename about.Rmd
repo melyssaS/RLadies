@@ -47,7 +47,7 @@ text-align: left;
 </div>
 <div class="col-sm-4" style=" text-align: center;">
 # **Vision**
->d.
+>Incrementar la cantidad de mujeres que poseen conocimiento de R .
 
 </div>
 <div class="col-sm-4" style=" text-align: center;">

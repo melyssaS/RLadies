@@ -322,7 +322,6 @@ library(gifski)</code></pre>
 <div id="nuevo" class="section level2">
 <h2>NUEVO</h2>
 <pre class="r"><code>datos &lt;- read.csv(file=&quot;DATOS 1.csv&quot;,sep=&quot;;&quot;)
-
 #Animada de fuerza laboral en cada pais 
 pgg &lt;- ggplot(
   datos,
@@ -547,9 +546,6 @@ Frame 99 (99%)
 Frame 100 (100%)
 ## Finalizing encoding... done!</code></pre>
 <p><img src="proyecto_files/figure-html/unnamed-chunk-2-1.gif" /><!-- --></p>
-</div>
-<div id="selección-de-datos" class="section level2">
-<h2>Selección de datos</h2>
 <pre class="r"><code>library(leaflet)
 library(leaflet.extras)
 library(magrittr)
@@ -565,11 +561,11 @@ mapa &lt;- leaflet()%&gt;% addTiles()%&gt;%
   )
 
 mapa%&gt;%fitBounds(lng1 =--64.9912286 ,lat1 = -17.0568696,lng2 =-64.9912286 ,lat2 =-17.0568696 )</code></pre>
-<div id="htmlwidget-9f1514e6c0a0f8aaf53e" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9f1514e6c0a0f8aaf53e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-10,4.3,-1.83,8.99,-12.04,6.42],[-55,-74.79,-78.183,-79.52,-77.03,-66.59],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>País: Brasil <\/b> <br/> Fuerza laboral: 45714195 <br/> Año: 2018 <br/>","<b>País: Colombia <\/b> <br/> Fuerza laboral: 11532908 <br/> Año: 2018 <br/>","<b>País: Ecuador <\/b> <br/> Fuerza laboral: 3508491 <br/> Año: 2018 <br/>","<b>País: Panam? <\/b> <br/> Fuerza laboral: 804027 <br/> Año: 2018 <br/>","<b>País: Peru <\/b> <br/> Fuerza laboral: 8398895 <br/> Año: 2018 <br/>","<b>País: Venezuela <\/b> <br/> Fuerza laboral: 5162000 <br/> Año: 2018 <br/>"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-12.04,8.99],"lng":[-79.52,-55]},"fitBounds":[-17.0568696,64.9912286,-17.0568696,-64.9912286,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f6fcc5fb73b2ae061aff" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f6fcc5fb73b2ae061aff">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-10,4.3,-1.83,8.99,-12.04,6.42],[-55,-74.79,-78.183,-79.52,-77.03,-66.59],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>País: Brasil <\/b> <br/> Fuerza laboral: 45714195 <br/> Año: 2018 <br/>","<b>País: Colombia <\/b> <br/> Fuerza laboral: 11532908 <br/> Año: 2018 <br/>","<b>País: Ecuador <\/b> <br/> Fuerza laboral: 3508491 <br/> Año: 2018 <br/>","<b>País: Panam? <\/b> <br/> Fuerza laboral: 804027 <br/> Año: 2018 <br/>","<b>País: Peru <\/b> <br/> Fuerza laboral: 8398895 <br/> Año: 2018 <br/>","<b>País: Venezuela <\/b> <br/> Fuerza laboral: 5162000 <br/> Año: 2018 <br/>"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-12.04,8.99],"lng":[-79.52,-55]},"fitBounds":[-17.0568696,64.9912286,-17.0568696,-64.9912286,[]]},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="librerias" class="section level2">
-<h2>Librerias</h2>
+<div id="salario-hombres-vs-mujeres" class="section level2">
+<h2>Salario Hombres vs Mujeres</h2>
 <pre class="r"><code>library(readr)
 library(tidyr)
 library(dplyr)
@@ -581,7 +577,7 @@ empleo_genero &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/cien
 save(empleo_genero,file = &quot;Empleo.Rdata&quot;)
 load(&quot;Empleo.Rdata&quot;)</code></pre>
 </div>
-<div id="selección-de-datos-1" class="section level2">
+<div id="selección-de-datos" class="section level2">
 <h2>Selección de datos</h2>
 <pre class="r"><code>Datos &lt;- empleo_genero %&gt;%
   #Seleccion de las variables para cambiar a formato largo
